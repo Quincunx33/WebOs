@@ -4,8 +4,8 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
   <title>Web OS Lite</title>
-  <link rel="stylesheet" href="href="/WebOs/css/style.css"
-"/>
+  <base href="/WebOs/">
+  <link rel="stylesheet" href="css/style.css"/>
 </head>
 <body>
   <div id="boot-screen">
@@ -82,8 +82,7 @@
     </div>
 
     <div id="workspace-switcher" style="display: none;">
-      <!-- Workspace buttons will be added dynamically -->
-    </div>
+      </div>
   </div>
 
   <template id="window-template">
@@ -101,34 +100,32 @@
     </div>
   </template>
 
-<!-- সঠিক অর্ডার -->
-<script src="js/security.js"></script>
-<script src="js/core.js"></script>
-<script src="js/window.js"></script>
-<script src="js/apps.js"></script>
-<script src="js/notifications.js"></script>
-<script src="js/shortcuts.js"></script>
-<script src="js/dragdrop.js"></script>
-<script src="js/performance.js"></script>
-<script src="js/workspace.js"></script>
-<!-- App ফাইলগুলি -->
-<script src="js/files.js"></script>
-<script src="js/notes.js"></script>
-<script src="js/browser.js"></script>
-<script src="js/terminal.js"></script>
-<script src="js/settings.js"></script>
-<script src="js/music.js"></script>
-<script src="js/calculator.js"></script>
-<script src="js/taskmanager.js"></script>
-<!-- Main ফাইল -->
-<script src="js/main.js"></script>
+  <script src="js/core.js"></script>
+  <script src="js/window.js"></script>
+  
+  <script src="js/security.js"></script>
+  <script src="js/performance.js"></script>
+  <script src="js/notifications.js"></script>
+  <script src="js/shortcuts.js"></script>
+  <script src="js/dragdrop.js"></script>
+  <script src="js/workspace.js"></script>
+  
+  <script src="js/files.js"></script>
+  <script src="js/notes.js"></script>
+  <script src="js/browser.js"></script>
+  <script src="js/terminal.js"></script>
+  <script src="js/settings.js"></script>
+  <script src="js/music.js"></script>
+  <script src="js/calculator.js"></script>
+  <script src="js/taskmanager.js"></script>
+  
+  <script src="js/apps.js"></script>
+  <script src="js/main.js"></script>
 
-  <!-- Initialization Script -->
   <script>
     // Final initialization
     document.addEventListener('DOMContentLoaded', function() {
       console.log('Web OS Lite - Initializing Complete System');
-      
       // Apply settings immediately
       if (typeof applySettings === 'function') {
         applySettings();
@@ -147,7 +144,6 @@
           bootScreen.style.display = 'none';
         }
       }, 1500);
-      
       // Load desktop background
       const wallpaper = document.getElementById('wallpaper');
       if (wallpaper && window.settings && window.settings.wallpaper) {
