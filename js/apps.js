@@ -280,4 +280,3 @@ if (document.readyState === 'loading') {
 // ডিবাগিং এর জন্য লগ করুন
 console.log('Web OS Lite Apps loaded successfully');
 console.log('Available apps:', Object.keys(apps));
-
