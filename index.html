@@ -1,0 +1,184 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Web OS Lite</title>
+  <link rel="stylesheet" href="css/style.css"/>
+</head>
+<script src="https://accounts.google.com/gsi/client" async defer></script>
+<body>
+  <div id="boot-screen">
+    <div class="logo">Web OS <span>Lite</span></div>
+    <div class="loading"><div></div></div>
+  </div>
+
+  <div id="desktop" class="theme-light">
+    <img id="wallpaper" alt="wallpaper"/>
+    
+    <div id="desktop-icons">
+      <div class="icon" data-app="files">
+        <div class="emoji">📁</div>
+        <div class="label">Files</div>
+      </div>
+      <div class="icon" data-app="notes">
+        <div class="emoji">📝</div>
+        <div class="label">Notes</div>
+      </div>
+      <div class="icon" data-app="browser">
+        <div class="emoji">🌐</div>
+        <div class="label">Browser</div>
+      </div>
+      <div class="icon" data-app="settings">
+        <div class="emoji">⚙️</div>
+        <div class="label">Settings</div>
+      </div>
+      <div class="icon" data-app="terminal">
+        <div class="emoji">💻</div>
+        <div class="label">Terminal</div>
+      </div>
+      <div class="icon" data-app="music">
+        <div class="emoji">🎵</div>
+        <div class="label">Music</div>
+      </div>
+      <div class="icon" data-app="calculator">
+        <div class="emoji">🧮</div>
+        <div class="label">Calculator</div>
+      </div>
+      <div class="icon" data-app="taskmanager">
+        <div class="emoji">✅</div>
+        <div class="label">Tasks</div>
+      </div>
+    </div>
+
+    <div id="taskbar">
+      <div class="taskbar-left">
+        <button id="start-btn">⊞</button>
+      </div>
+      <div class="taskbar-center">
+        <div id="taskbar-apps"></div>
+      </div>
+      <div class="taskbar-right">
+        <button id="shutdown-btn">⏻</button>
+        <div id="clock"></div>
+      </div>
+    </div>
+
+    <div id="start-menu" class="hidden">
+      <div class="menu-group">
+        <div class="menu-item" data-app="files">📁 Files</div>
+        <div class="menu-item" data-app="notes">📝 Notes</div>
+        <div class="menu-item" data-app="browser">🌐 Browser</div>
+        <div class="menu-item" data-app="music">🎵 Music</div>
+        <div class="menu-item" data-app="calculator">🧮 Calculator</div>
+        <div class="menu-item" data-app="taskmanager">✅ Task Manager</div>
+        <div class="menu-item" data-app="settings">⚙️ Settings</div>
+        <div class="menu-item" data-app="terminal">💻 Terminal</div>
+      </div>
+      <div class="menu-group small">
+        <div class="menu-item" id="lock-desktop">🔒 Lock</div>
+        <div class="menu-item" id="shutdown">⏻ Power</div>
+      </div>
+    </div>
+
+    <div id="workspace-switcher" style="display: none;">
+      </div>
+
+    <div id="dock">
+        <button id="app-drawer-btn" title="Show all apps">
+            <div class="emoji">🎛️</div>
+        </button>
+    </div>
+
+    <div id="app-drawer" class="hidden">
+        <div class="app-drawer-grid">
+            </div>
+    </div>
+  </div>
+
+  <template id="window-template">
+    <div class="window">
+      <div class="titlebar">
+        <div class="title">App</div>
+        <div class="actions">
+          <button class="btn-min" title="Minimize">—</button>
+          <button class="btn-max" title="Maximize">▢</button>
+          <button class="btn-close" title="Close">✕</button>
+        </div>
+      </div>
+      <div class="content"></div>
+      <div class="statusbar"></div>
+    </div>
+  </template>
+
+  <script src="js/core.js"></script>
+  <script src="js/window.js"></script>
+  
+  <script src="js/security.js"></script>
+  <script src="js/performance.js"></script>
+  <script src="js/notifications.js"></script>
+  <script src="js/shortcuts.js"></script>
+  <script src="js/dragdrop.js"></script>
+  <script src="js/workspace.js"></script>
+  
+  <script src="js/files.js"></script>
+  <script src="js/notes.js"></script>
+  <script src="js/browser.js"></script>
+  <script src="js/terminal.js"></script>
+  <script src="js/settings.js"></script>
+  <script src="js/music.js"></script>
+  <script src="js/calculator.js"></script>
+  <script src="js/taskmanager.js"></script>
+  
+  <script src="js/apps.js"></script>
+  <script src="js/dock.js"></script>
+  <script src="js/main.js"></script>
+
+  <script>
+    // Final initialization
+    document.addEventListener('DOMContentLoaded', function() {
+      console.log('Web OS Lite - Initializing Complete System');
+      // Apply settings immediately
+      if (typeof applySettings === 'function') {
+        applySettings();
+      }
+      
+      // Initialize clock
+      if (typeof updateClock === 'function') {
+        updateClock();
+        setInterval(updateClock, 1000);
+      }
+      
+      // Hide boot screen after delay
+      setTimeout(() => {
+        const bootScreen = document.getElementById('boot-screen');
+        if (bootScreen) {
+          bootScreen.style.display = 'none';
+        }
+      }, 1500);
+      // Load desktop background
+      const wallpaper = document.getElementById('wallpaper');
+      if (wallpaper && window.settings && window.settings.wallpaper) {
+        wallpaper.src = window.settings.wallpaper;
+      } else if (wallpaper) {
+        wallpaper.src = 'https://images.unsplash.com/photo-1469474968028-56623f02e42e?q=80&w=1600&auto=format&fit=crop';
+      }
+      
+      console.log('Web OS Lite - Ready!');
+      console.log('Available apps:', Object.keys(window.apps || {}));
+    });
+
+    // Error handling for missing files
+    window.addEventListener('error', function(e) {
+      console.error('Script loading error:', e);
+      const errorMsg = `Failed to load: ${e.filename || 'unknown file'}`;
+      
+      if (typeof showNotification === 'function') {
+        showNotification('Loading Error', errorMsg, { type: 'error' });
+      }
+    });
+  </script>
+</body>
+</html>
+
+
