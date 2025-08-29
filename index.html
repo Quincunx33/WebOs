@@ -3,9 +3,10 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-  <title>Web OS Beta 1 </title>
+  <title>Web OS Lite</title>
   <link rel="stylesheet" href="css/style.css"/>
 </head>
+<script src="https://accounts.google.com/gsi/client" async defer></script>
 <body>
   <div id="boot-screen">
     <div class="logo">Web OS <span>Lite</span></div>
@@ -82,6 +83,17 @@
 
     <div id="workspace-switcher" style="display: none;">
       </div>
+
+    <div id="dock">
+        <button id="app-drawer-btn" title="Show all apps">
+            <div class="emoji">🎛️</div>
+        </button>
+    </div>
+
+    <div id="app-drawer" class="hidden">
+        <div class="app-drawer-grid">
+            </div>
+    </div>
   </div>
 
   <template id="window-template">
@@ -119,6 +131,7 @@
   <script src="js/taskmanager.js"></script>
   
   <script src="js/apps.js"></script>
+  <script src="js/dock.js"></script>
   <script src="js/main.js"></script>
 
   <script>
@@ -167,3 +180,6 @@
   </script>
 </body>
 </html>
+
+
+
