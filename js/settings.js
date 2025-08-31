@@ -517,12 +517,13 @@ function renderSettingsContent(panel, cat) {
           <div class="settings-header">
             <h2>About</h2>
             <p>System information and updates</p>
-          </div>
+     <h1>This is a demo verson(2). we are soon releasing our beta and next stable version soon .so stay with us<\h1>
+               </div>
           <div class="group">
             <h3>ℹ️ System Info</h3>
             <div class="setting-item">
               <label>Version</label>
-              <span>${window.APP_VERSION || "1.0.0"}</span>
+              <span>${window.APP_VERSION || "2.0.0(demo)"}</span>
             </div>
             <div class="setting-item">
               <button id="check-updates">Check for Updates</button>
@@ -809,7 +810,7 @@ function parseJwt(token) {
   })();
   // ----------------- About -----------------
   const About = (() => {
-    window.APP_VERSION = window.APP_VERSION || "1.0.0";
+    window.APP_VERSION = window.APP_VERSION || "2.0.0(demo)";
     const checkForUpdates = async (url = "https://your-server.com/app-version.json") => {
       try {
         const res = await fetch(url, { cache: "no-store" });
